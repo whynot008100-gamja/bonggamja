@@ -17,17 +17,19 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 let lastScroll = 0;
 const navbar = document.querySelector(".navbar");
 
-window.addEventListener("scroll", () => {
-  const currentScroll = window.pageYOffset;
+if (navbar) {
+  window.addEventListener("scroll", () => {
+    const currentScroll = window.pageYOffset;
 
-  if (currentScroll > 100) {
-    navbar.style.boxShadow = "0 4px 16px rgba(0, 0, 0, 0.12)";
-  } else {
-    navbar.style.boxShadow = "0 2px 8px rgba(0, 0, 0, 0.08)";
-  }
+    if (currentScroll > 100) {
+      navbar.style.boxShadow = "0 4px 16px rgba(0, 0, 0, 0.12)";
+    } else {
+      navbar.style.boxShadow = "0 2px 8px rgba(0, 0, 0, 0.08)";
+    }
 
-  lastScroll = currentScroll;
-});
+    lastScroll = currentScroll;
+  });
+}
 
 // Intersection Observer for fade-in animations
 const observerOptions = {

@@ -1088,19 +1088,31 @@
         document.querySelector(".chatbot-button")
       );
 
-      // contact 섹션(지도 div 포함)이 생성된 후 지도 초기화 시도
-      // 이미 구글맵 API가 로드되었을 수 있으므로 체크
-      if (
-        window.google &&
-        window.google.maps &&
-        document.getElementById("map")
-      ) {
-        // 이미 API가 로드되어 있고 지도 div도 있으면 바로 초기화
-        setTimeout(() => {
-          if (window.initMap) {
-            window.initMap();
-          }
-        }, 100);
+      // contact 섹션(지도 div 포함)이 생성된 후 즉시 대체 방법으로 지도 표시
+      // API 오류가 자주 발생하므로 먼저 대체 방법 사용, 성공하면 교체
+      const mapDivElement = document.getElementById("map");
+      if (mapDivElement) {
+        // 먼저 대체 방법(iframe)으로 지도를 표시 (항상 작동)
+        if (typeof window.loadMapFallback === "function") {
+          window.loadMapFallback(mapDivElement);
+        } else {
+          // loadMapFallback이 아직 정의되지 않았으면 직접 표시
+          setTimeout(() => {
+            const address = encodeURIComponent(
+              "제주특별자치도 제주시 연동 연북로 158"
+            );
+            const iframe = document.createElement("iframe");
+            iframe.src = `https://www.google.com/maps?q=${address}&output=embed&language=ko`;
+            iframe.style.width = "100%";
+            iframe.style.height = "400px";
+            iframe.style.border = "none";
+            iframe.style.borderRadius = "12px";
+            iframe.setAttribute("loading", "lazy");
+            iframe.setAttribute("allowfullscreen", "");
+            mapDivElement.innerHTML = "";
+            mapDivElement.appendChild(iframe);
+          }, 100);
+        }
       }
 
       const footer = createElement("footer");
@@ -1179,6 +1191,16 @@
 
       // 구글맵 초기화 함수 (전역 접근 가능하도록)
       window.initMap = function () {
+        // Google Maps API 오류가 이미 발생했는지 확인
+        if (window.googleMapsError) {
+          console.log("이미 API 오류가 감지되어 대체 방법을 사용합니다.");
+          const mapEl = document.getElementById("map");
+          if (mapEl && typeof window.loadMapFallback === "function") {
+            window.loadMapFallback(mapEl);
+          }
+          return;
+        }
+
         // 지도 div가 존재하는지 확인
         let mapElement = document.getElementById("map");
 
@@ -1246,8 +1268,12 @@
           setTimeout(() => {
             clearInterval(apiCheckInterval);
             if (!window.google || !window.google.maps) {
-              console.warn("구글맵 API 로드 실패. 대체 방법을 사용합니다.");
-              loadMapFallback(mapElement);
+              console.warn(
+                "구글맵 API 로드 실패. 대체 방법(iframe)을 사용합니다."
+              );
+              if (typeof window.loadMapFallback === "function") {
+                window.loadMapFallback(mapElement);
+              }
             }
           }, 5000);
           return;
@@ -1259,6 +1285,15 @@
       // 지도를 실제로 초기화하는 함수
       function tryInitializeMap(mapElement, location) {
         try {
+          // 구글맵 API가 제대로 로드되었는지 확인
+          if (
+            !window.google ||
+            !window.google.maps ||
+            !window.google.maps.Map
+          ) {
+            throw new Error("Google Maps API가 로드되지 않았습니다.");
+          }
+
           // 지도 생성
           const map = new google.maps.Map(mapElement, {
             zoom: 17,
@@ -1267,6 +1302,25 @@
             streetViewControl: true,
             fullscreenControl: true,
           });
+
+          // 지도 로드 확인 및 API 오류 감지
+          let mapLoaded = false;
+          google.maps.event.addListenerOnce(map, "tilesloaded", function () {
+            mapLoaded = true;
+            console.log("구글맵이 성공적으로 초기화되었습니다.");
+          });
+
+          // API 오류 감지 - 3초 후에도 지도가 로드되지 않으면 fallback 사용
+          setTimeout(() => {
+            if (!mapLoaded) {
+              console.warn(
+                "지도 로드 타임아웃. API 오류 가능성. 대체 방법 사용"
+              );
+              if (typeof window.loadMapFallback === "function") {
+                window.loadMapFallback(mapElement);
+              }
+            }
+          }, 3000);
 
           // 마커 추가
           const marker = new google.maps.Marker({
@@ -1287,17 +1341,28 @@
 
           // 정보창을 기본으로 열기
           infoWindow.open(map, marker);
-
-          console.log("구글맵이 성공적으로 초기화되었습니다.");
         } catch (error) {
           console.error("구글맵 초기화 중 오류 발생:", error);
+          console.log("API 오류로 인해 대체 방법(iframe)을 사용합니다.");
           // API 오류 시 iframe 방식으로 대체
-          loadMapFallback(mapElement);
+          if (typeof window.loadMapFallback === "function") {
+            window.loadMapFallback(mapElement);
+          }
         }
       }
 
       // API 오류 시 사용할 대체 지도 (iframe 방식, API 키 불필요) - 전역 접근 가능
       window.loadMapFallback = function (mapElement) {
+        if (!mapElement) {
+          console.error("지도 요소가 없습니다.");
+          return;
+        }
+
+        // 이미 iframe이 있으면 중복 생성 방지
+        if (mapElement.querySelector("iframe")) {
+          return;
+        }
+
         const address = encodeURIComponent(
           "제주특별자치도 제주시 연동 연북로 158"
         );
@@ -1309,8 +1374,15 @@
         iframe.style.borderRadius = "12px";
         iframe.setAttribute("loading", "lazy");
         iframe.setAttribute("allowfullscreen", "");
+        iframe.setAttribute("title", "오브래쉬 AUBE 위치");
+
+        // 기존 내용 지우고 iframe 추가
         mapElement.innerHTML = "";
         mapElement.appendChild(iframe);
+
+        // 초기화 표시
+        mapElement.dataset.fallbackUsed = "true";
+        console.log("대체 방법(iframe)으로 지도가 표시되었습니다.");
       };
 
       // 구글맵 API 로드 실패 시 대체 방법 사용
@@ -1362,16 +1434,133 @@
             if (window.google && window.google.maps && window.initMap) {
               console.log("Window 로드 후 지도 초기화 시도");
               window.initMap();
-            } else if (mapElement && !window.google) {
-              // API가 로드되지 않았으면 대체 방법 사용
-              console.log("구글맵 API 미로드. 대체 방법 사용");
-              if (typeof loadMapFallback === "function") {
-                loadMapFallback(mapElement);
+            } else if (mapElement) {
+              // API가 로드되지 않았거나 오류가 있으면 대체 방법 사용
+              console.log("구글맵 API 문제 감지. 대체 방법(iframe) 사용");
+              if (typeof window.loadMapFallback === "function") {
+                window.loadMapFallback(mapElement);
               }
             }
           }
-        }, 1000);
+
+          // 5초 후에도 지도가 초기화되지 않았으면 강제로 대체 방법 사용
+          setTimeout(() => {
+            const mapEl = document.getElementById("map");
+            if (
+              mapEl &&
+              !mapEl.dataset.initialized &&
+              !mapEl.querySelector("iframe")
+            ) {
+              console.log(
+                "지도 초기화 타임아웃. 대체 방법(iframe)으로 전환합니다."
+              );
+              window.googleMapsError = true;
+              if (typeof window.loadMapFallback === "function") {
+                window.loadMapFallback(mapEl);
+              }
+            }
+          }, 5000);
+        }, 2000);
       });
+
+      // Google Maps API 오류 감지 (ApiTargetBlockedMapError 등)
+      const originalConsoleError = console.error;
+      console.error = function (...args) {
+        const errorMessage = args.join(" ");
+        if (
+          errorMessage.includes("ApiTargetBlockedMapError") ||
+          errorMessage.includes("Google Maps JavaScript API error") ||
+          errorMessage.includes("maps.googleapis.com")
+        ) {
+          window.googleMapsError = true; // 오류 플래그 설정
+          console.warn("Google Maps API 오류 감지. 대체 방법으로 전환합니다.");
+          setTimeout(() => {
+            const mapEl = document.getElementById("map");
+            if (mapEl && !mapEl.dataset.initialized) {
+              if (typeof window.loadMapFallback === "function") {
+                window.loadMapFallback(mapEl);
+              }
+            }
+          }, 500);
+        }
+        originalConsoleError.apply(console, args);
+      };
+
+      // 네트워크 요청 실패 감지 (403, 404 등)
+      const originalFetch = window.fetch;
+      window.fetch = function (...args) {
+        return originalFetch.apply(this, args).catch((error) => {
+          const url = args[0];
+          if (
+            url &&
+            typeof url === "string" &&
+            (url.includes("maps.googleapis.com") ||
+              url.includes("google.com/maps"))
+          ) {
+            console.warn("Google Maps API 요청 실패. 대체 방법 사용:", error);
+            window.googleMapsError = true;
+            setTimeout(() => {
+              const mapEl = document.getElementById("map");
+              if (
+                mapEl &&
+                !mapEl.dataset.initialized &&
+                typeof window.loadMapFallback === "function"
+              ) {
+                window.loadMapFallback(mapEl);
+              }
+            }, 500);
+          }
+          throw error;
+        });
+      };
+
+      // XMLHttpRequest 실패 감지 (403, 404 등)
+      const originalXHROpen = XMLHttpRequest.prototype.open;
+      XMLHttpRequest.prototype.open = function (method, url, ...rest) {
+        if (
+          url &&
+          (url.includes("maps.googleapis.com") ||
+            url.includes("google.com/maps"))
+        ) {
+          this.addEventListener("error", function () {
+            console.warn("Google Maps API 요청 실패. 대체 방법 사용");
+            window.googleMapsError = true;
+            setTimeout(() => {
+              const mapEl = document.getElementById("map");
+              if (
+                mapEl &&
+                !mapEl.dataset.initialized &&
+                typeof window.loadMapFallback === "function"
+              ) {
+                window.loadMapFallback(mapEl);
+              }
+            }, 500);
+          });
+          this.addEventListener("load", function () {
+            if (
+              this.status === 403 ||
+              this.status === 404 ||
+              this.status >= 400
+            ) {
+              console.warn(
+                "Google Maps API 오류 (" + this.status + "). 대체 방법 사용"
+              );
+              window.googleMapsError = true;
+              setTimeout(() => {
+                const mapEl = document.getElementById("map");
+                if (
+                  mapEl &&
+                  !mapEl.dataset.initialized &&
+                  typeof window.loadMapFallback === "function"
+                ) {
+                  window.loadMapFallback(mapEl);
+                }
+              }, 500);
+            }
+          });
+        }
+        return originalXHROpen.call(this, method, url, ...rest);
+      };
 
       // API 스크립트 로드 실패 시 대체 방법
       window.addEventListener("error", function (e) {
@@ -1380,14 +1569,39 @@
           e.filename.includes("maps.googleapis.com") &&
           document.getElementById("map")
         ) {
+          window.googleMapsError = true;
           setTimeout(() => {
             if (!window.google || !window.google.maps) {
               const mapEl = document.getElementById("map");
-              if (mapEl && typeof loadMapFallback === "function") {
-                loadMapFallback(mapEl);
+              if (mapEl && typeof window.loadMapFallback === "function") {
+                window.loadMapFallback(mapEl);
               }
             }
           }, 2000);
+        }
+      });
+
+      // 리소스 로드 실패 감지 (403 등)
+      window.addEventListener("unhandledrejection", function (event) {
+        const reason = event.reason;
+        if (
+          reason &&
+          (reason.message?.includes("403") ||
+            reason.message?.includes("maps.googleapis.com") ||
+            reason.message?.includes("Forbidden"))
+        ) {
+          console.warn("Google Maps API 요청 실패 감지. 대체 방법 사용");
+          window.googleMapsError = true;
+          setTimeout(() => {
+            const mapEl = document.getElementById("map");
+            if (
+              mapEl &&
+              !mapEl.dataset.initialized &&
+              typeof window.loadMapFallback === "function"
+            ) {
+              window.loadMapFallback(mapEl);
+            }
+          }, 500);
         }
       });
     </script>
