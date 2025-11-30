@@ -6,15 +6,10 @@
     <title>제주 오브래쉬 (AUBE) | 감성 속눈썹 뷰티샵</title>
     <meta
       name="description"
-      content="제주 제주시 연북로 158에 위치한 감성 속눈썹 전문샵 오브래쉬(AUBE). 펌 + LED 포인트 연장으로 완성되는 자연스러운 눈매, 1:1 맞춤 디자인으로 당신만의 아름다움을 찾아보세요."
+      content="제주 제주시 연북로 158에 위치한 감성 속눈썹 전문샵 오브래쉬(AUBE). 펌 + LED 포인트 연장으로 완성되는 자연스러운 눈매."
     />
-    <meta property="og:title" content="제주 오브래쉬 (AUBE)" />
-    <meta
-      property="og:description"
-      content="제주 감성 그대로 — 속눈썹 펌 & LED 연장 전문 뷰티샵 AUBE"
-    />
-    <meta property="og:type" content="website" />
     <style>
+      /* === 기본 스타일 === */
       body {
         margin: 0;
         font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -31,12 +26,14 @@
         position: relative;
       }
 
+      /* === 언어 선택 버튼 === */
       .lang-selector-top {
         position: absolute;
         top: 20px;
         right: 20px;
         display: flex;
         gap: 8px;
+        z-index: 10;
       }
 
       .lang-btn {
@@ -60,21 +57,25 @@
         color: #fff;
       }
 
+      /* === 뒤로가기 링크 === */
+      .back-link {
+        display: inline-block;
+        margin-bottom: 30px;
+        color: #d6a77a;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+      .back-link:hover {
+        color: #c49666;
+      }
+
+      /* === 히어로 섹션 === */
       .hero {
         text-align: center;
         margin-bottom: 50px;
-        opacity: 0;
-        transform: translateY(20px);
         animation: fadeInUp 0.6s ease forwards;
       }
-
-      @keyframes fadeInUp {
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
       .hero h1 {
         font-size: 2.5rem;
         font-weight: 700;
@@ -82,45 +83,19 @@
         margin-bottom: 15px;
         line-height: 1.3;
       }
-
       .hero p {
         font-size: 1.1rem;
         color: #666;
       }
 
+      /* === 카드 스타일 === */
       .card {
         background: #fff;
         border-radius: 16px;
         padding: 40px;
         margin-bottom: 30px;
         box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-        opacity: 0;
-        transform: translateY(20px);
         animation: fadeInUp 0.6s ease forwards;
-      }
-
-      .card:nth-child(3) {
-        animation-delay: 0.1s;
-      }
-
-      .card:nth-child(4) {
-        animation-delay: 0.2s;
-      }
-
-      .card:nth-child(5) {
-        animation-delay: 0.3s;
-      }
-
-      .card:nth-child(6) {
-        animation-delay: 0.4s;
-      }
-
-      .card:nth-child(7) {
-        animation-delay: 0.5s;
-      }
-
-      .card:nth-child(8) {
-        animation-delay: 0.6s;
       }
 
       .card h2 {
@@ -161,111 +136,7 @@
         top: 5px;
       }
 
-      .review-list {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        margin-bottom: 25px;
-      }
-
-      .review-item {
-        background: #f9f9f9;
-        padding: 20px;
-        border-radius: 12px;
-        border-left: 4px solid #d6a77a;
-      }
-
-      .review-item p {
-        margin: 0;
-        font-size: 1rem;
-        color: #555;
-        line-height: 1.7;
-      }
-
-      .review-form {
-        margin-top: 25px;
-      }
-
-      .review-form textarea {
-        width: 100%;
-        padding: 15px;
-        border: 2px solid #e8e4de;
-        border-radius: 12px;
-        font-family: inherit;
-        font-size: 1rem;
-        resize: vertical;
-        min-height: 100px;
-        transition: border-color 0.3s;
-      }
-
-      .review-form textarea:focus {
-        outline: none;
-        border-color: #d6a77a;
-      }
-
-      .review-form textarea::placeholder {
-        color: #999;
-      }
-
-      .comment-form {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        margin-top: 20px;
-      }
-
-      .comment-form input,
-      .comment-form textarea {
-        width: 100%;
-        padding: 12px 15px;
-        border: 2px solid #e8e4de;
-        border-radius: 12px;
-        font-family: inherit;
-        font-size: 1rem;
-      }
-
-      .comment-form input:focus,
-      .comment-form textarea:focus {
-        outline: none;
-        border-color: #d6a77a;
-      }
-
-      .comment-list {
-        margin-top: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-      }
-
-      .comment-item {
-        background: #fffdf7;
-        border: 1px solid #f0e4d8;
-        border-radius: 12px;
-        padding: 15px 18px;
-      }
-
-      .comment-item strong {
-        color: #c48c65;
-      }
-
-      .gallery-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 15px;
-        margin-top: 25px;
-      }
-
-      .gallery-placeholder {
-        background: linear-gradient(135deg, #f9f4ef 0%, #f0ebe5 100%);
-        height: 200px;
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #999;
-        font-size: 3rem;
-      }
-
+      /* === 서비스 그리드 === */
       .service-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -277,48 +148,50 @@
         background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%);
         padding: 25px;
         border-radius: 16px;
-        transition: transform 0.3s, box-shadow 0.3s;
+        transition: transform 0.3s;
       }
-
       .service-item:hover {
         transform: translateY(-5px);
-        box-shadow: 0 4px 20px rgba(214, 167, 122, 0.2);
       }
-
       .service-item h3 {
         font-size: 1.2rem;
-        font-weight: 600;
-        color: #1a1a1a;
         margin-bottom: 10px;
+        color: #1a1a1a;
       }
-
       .service-item p {
         font-size: 0.95rem;
-        color: #666;
         margin: 0;
-        line-height: 1.6;
+        color: #666;
       }
 
-      .map-container {
+      /* === 갤러리 플레이스홀더 === */
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-top: 25px;
+      }
+      .gallery-placeholder {
+        background: linear-gradient(135deg, #f9f4ef 0%, #f0ebe5 100%);
+        height: 200px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #999;
+        font-size: 3rem;
+      }
+
+      /* === 구글 맵 컨테이너 스타일 === */
+      #map {
+        width: 100%;
+        height: 350px;
         margin-top: 20px;
         border-radius: 12px;
-        overflow: hidden;
         border: 1px solid #e8e4de;
       }
 
-      .map-container iframe {
-        width: 100%;
-        height: 300px;
-        border: none;
-      }
-
-      .btn-group {
-        display: flex;
-        gap: 15px;
-        margin-top: 20px;
-        flex-wrap: wrap;
-      }
-
+      /* === 버튼 === */
       .btn {
         display: inline-block;
         background: #d6a77a;
@@ -331,782 +204,356 @@
         border: none;
         cursor: pointer;
         font-size: 1rem;
-        font-family: inherit;
       }
-
       .btn:hover {
         background: #c49666;
         transform: translateY(-2px);
       }
-
       .btn-outline {
         background: transparent;
         border: 2px solid #d6a77a;
         color: #d6a77a;
       }
-
       .btn-outline:hover {
         background: #d6a77a;
         color: #fff;
       }
+      .btn-group {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+      }
 
+      /* === 방문 정보 === */
       .contact-info {
         background: linear-gradient(135deg, #f9f4ef 0%, #f0ebe5 100%);
         padding: 25px;
         border-radius: 12px;
         margin-top: 20px;
       }
-
       .contact-info p {
         margin: 10px 0;
-        font-size: 1.05rem;
       }
-
       .contact-info strong {
         color: #d6a77a;
       }
 
-      .conclusion {
-        text-align: center;
-        margin-top: 50px;
-        padding: 40px 20px;
-        opacity: 0;
-        transform: translateY(20px);
-        animation: fadeInUp 0.6s ease forwards 0.7s;
+      /* === 애니메이션 === */
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
-      .conclusion h2 {
-        font-size: 1.8rem;
-        font-weight: 600;
-        color: #1a1a1a;
-        margin-bottom: 15px;
+      /* === 언어별 콘텐츠 제어 === */
+      .lang-content {
+        display: none; /* 기본 숨김 */
+        animation: fadeIn 0.5s ease-out;
+      }
+      .lang-content.active {
+        display: block; /* 선택된 언어만 보임 */
       }
 
-      .conclusion p {
-        font-size: 1.1rem;
-        color: #666;
-        line-height: 1.8;
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
-      .back-link {
-        display: inline-block;
-        margin-bottom: 30px;
-        color: #d6a77a;
-        text-decoration: none;
-        font-weight: 500;
-        transition: color 0.3s;
-      }
-
-      .back-link:hover {
-        color: #c49666;
-      }
-
-      .back-link::before {
-        content: "← ";
-      }
-
-      .hidden {
-        display: none;
-      }
-
+      /* 모바일 반응형 */
       @media (max-width: 768px) {
         .hero h1 {
           font-size: 2rem;
         }
-
         .card {
           padding: 30px 25px;
         }
-
-        .card h2 {
-          font-size: 1.5rem;
-        }
-
         .service-grid,
         .gallery-grid {
           grid-template-columns: 1fr;
         }
-
         .btn-group {
           flex-direction: column;
         }
-
         .btn {
           text-align: center;
         }
       }
     </style>
   </head>
-
   <body>
     <div class="container">
       <div class="lang-selector-top">
-        <button
-          class="lang-btn active"
-          data-lang="ko"
-          onclick="setBlogLang('ko')"
-        >
+        <button class="lang-btn active" onclick="changeLang('ko', this)">
           한국어
         </button>
-        <button class="lang-btn" data-lang="en" onclick="setBlogLang('en')">
+        <button class="lang-btn" onclick="changeLang('en', this)">
           English
         </button>
-        <button class="lang-btn" data-lang="zh" onclick="setBlogLang('zh')">
-          中文
-        </button>
+        <button class="lang-btn" onclick="changeLang('zh', this)">中文</button>
       </div>
-      <a href="index.html" class="back-link" id="backLink">메인으로 돌아가기</a>
 
-      <!-- Hero Section -->
-      <section class="hero">
-        <h1 id="heroTitle"></h1>
-        <p id="heroDesc"></p>
-      </section>
+      <a href="index.html" class="back-link"
+        >← 메인으로 돌아가기 (Back to Main)</a
+      >
 
-      <!-- Gallery Section -->
-      <div class="card">
-        <h2 id="galleryTitle"></h2>
-        <div class="gallery-grid">
-          <div class="gallery-placeholder">🏠</div>
-          <div class="gallery-placeholder">✨</div>
-          <div class="gallery-placeholder">💫</div>
+      <div id="content-ko" class="lang-content active">
+        <section class="hero">
+          <h1>제주 감성 그대로 — 오브래쉬 (AUBE)</h1>
+          <p>
+            속눈썹 펌 + LED 포인트 연장으로 완성되는, 제주 한복판 감성 뷰티샵 💫
+          </p>
+        </section>
+
+        <div class="card">
+          <h2>오브래쉬 갤러리 📸</h2>
+          <div class="gallery-grid">
+            <div class="gallery-placeholder">🏠</div>
+            <div class="gallery-placeholder">✨</div>
+            <div class="gallery-placeholder">💫</div>
+          </div>
+          <p
+            style="
+              text-align: center;
+              margin-top: 20px;
+              color: #999;
+              font-size: 0.9rem;
+            "
+          >
+            실제 시술 및 공간 사진은 Instagram @aube_lash_ 에서 확인하실 수
+            있어요.
+          </p>
         </div>
-        <p
-          class="muted"
-          id="galleryNote"
-          style="
-            margin-top: 20px;
-            font-size: 0.95rem;
-            color: #999;
-            text-align: center;
-          "
-        ></p>
+
+        <div class="card">
+          <h2>오브래쉬는 어떤 곳인가요?</h2>
+          <p>
+            제주 제주시 연동 연북로 158 2층에 자리한 속눈썹 & 펌 전문샵으로,
+            감성적인 공간에서 LED 포인트 연장과 펌 시술을 제공합니다.
+          </p>
+          <ul>
+            <li>펌 + LED 포인트 연장으로 자연스러운 볼륨감을 완성</li>
+            <li>1:1 상담으로 눈매와 라이프스타일에 맞춘 디자인 제안</li>
+            <li>케어 중심 프로세스로 속눈썹 손상 최소화</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>서비스 & 매력 포인트 ✨</h2>
+          <p>
+            단순한 연장이 아니라, 매일 아침 새로운 눈매를 맞이하는 경험을
+            선사합니다.
+          </p>
+          <div class="service-grid">
+            <div class="service-item">
+              <h3>펌 + LED 포인트 연장</h3>
+              <p>유지력은 높이고 무게감은 줄인 시그니처 시술</p>
+            </div>
+            <div class="service-item">
+              <h3>1:1 눈매 맞춤 디자인</h3>
+              <p>눈모양·골격·라이프스타일을 반영한 커스터마이징</p>
+            </div>
+            <div class="service-item">
+              <h3>제주 감성 인테리어</h3>
+              <p>프라이빗하고 아늑한 공간에서 편안한 시술</p>
+            </div>
+            <div class="service-item">
+              <h3>유연한 예약 시스템</h3>
+              <p>사전 예약제 운영 + 당일 문의 가능</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>오시는 길 🗺️</h2>
+          <p>제주 제주시 연동 연북로 158, 2층 오브래쉬 (AUBE)</p>
+
+          <div id="map"></div>
+
+          <p style="margin-top: 15px; font-size: 0.95rem; color: #666">
+            💡 연동 중앙버스정류장에서 도보 3분, 건물 앞 공영주차장 1시간 무료
+          </p>
+        </div>
+
+        <div class="card">
+          <h2>방문 & 예약 안내 📍</h2>
+          <div class="contact-info">
+            <p><strong>주소:</strong> 제주 제주시 연북로 158, 2층</p>
+            <p>
+              <strong>예약문의:</strong>
+              <a
+                href="tel:050-7135-50623"
+                style="color: #d6a77a; text-decoration: none"
+                >050-7135-50623</a
+              >
+            </p>
+            <p>
+              <strong>운영시간:</strong> 오전 10시 ~ 저녁 7시 (공휴일 변동 가능)
+            </p>
+          </div>
+          <div class="btn-group">
+            <a
+              href="https://www.instagram.com/aube_lash_/"
+              target="_blank"
+              class="btn"
+              >Instagram 방문하기</a
+            >
+            <a
+              href="https://map.naver.com/p/entry/place/1503575021"
+              target="_blank"
+              class="btn btn-outline"
+              >네이버지도 보기</a
+            >
+          </div>
+        </div>
+
+        <section class="hero" style="margin-top: 50px">
+          <h2>마무리 ✨</h2>
+          <p>
+            제주에서 만나는 감성 속눈썹 공간, 오브래쉬.<br />나만의 눈매와
+            여유를 찾는 시간을 지금 예약해 보세요.
+          </p>
+        </section>
       </div>
 
-      <!-- About Section -->
-      <div class="card">
-        <h2 id="aboutTitle"></h2>
-        <p id="aboutDesc"></p>
-        <ul id="aboutList"></ul>
-      </div>
+      <div id="content-en" class="lang-content">
+        <section class="hero">
+          <h1>Jeju’s Signature Lash Experience — AUBE</h1>
+          <p>
+            Lash perm + LED point extensions crafted in a warm, private studio
+            💫
+          </p>
+        </section>
 
-      <!-- Services Section -->
-      <div class="card">
-        <h2 id="serviceTitle"></h2>
-        <p id="serviceIntro"></p>
-        <div class="service-grid" id="serviceGrid"></div>
-      </div>
+        <div class="card">
+          <h2>AUBE Gallery 📸</h2>
+          <div class="gallery-grid">
+            <div class="gallery-placeholder">🏠</div>
+            <div class="gallery-placeholder">✨</div>
+            <div class="gallery-placeholder">💫</div>
+          </div>
+          <p
+            style="
+              text-align: center;
+              margin-top: 20px;
+              color: #999;
+              font-size: 0.9rem;
+            "
+          >
+            See live transformations on Instagram @aube_lash_.
+          </p>
+        </div>
 
-      <!-- Review Section -->
-      <div class="card">
-        <h2 id="reviewTitle"></h2>
-        <div class="review-list" id="reviewList"></div>
-        <div class="review-form">
-          <textarea id="reviewInput"></textarea>
-          <button
-            class="btn"
-            style="margin-top: 15px"
-            id="reviewButton"
-            onclick="submitReview()"
-          ></button>
+        <div class="card">
+          <h2>Visit & Booking Info 📍</h2>
+          <div class="contact-info">
+            <p><strong>Address:</strong> 2F, 158 Yeonbuk-ro, Jeju City</p>
+            <p>
+              <strong>Booking:</strong>
+              <a
+                href="tel:050-7135-50623"
+                style="color: #d6a77a; text-decoration: none"
+                >050-7135-50623</a
+              >
+            </p>
+            <p><strong>Hours:</strong> 10 AM – 7 PM (hours vary on holidays)</p>
+          </div>
         </div>
       </div>
 
-      <!-- Comment Section -->
-      <div class="card">
-        <h2 id="commentTitle"></h2>
-        <p id="commentSubtitle" class="muted"></p>
-        <div class="comment-form">
-          <input type="text" id="commentName" />
-          <textarea id="commentMessage" rows="4"></textarea>
-          <button
-            class="btn"
-            id="commentButton"
-            onclick="submitComment()"
-          ></button>
+      <div id="content-zh" class="lang-content">
+        <section class="hero">
+          <h1>济州感性美睫馆 — AUBE</h1>
+          <p>烫睫 + LED点缀延长的专属组合，让你一醒来就有迷人双眼 💫</p>
+        </section>
+
+        <div class="card">
+          <h2>访问与预约 📍</h2>
+          <div class="contact-info">
+            <p><strong>地址:</strong> 济州市莲北路158号2楼</p>
+            <p>
+              <strong>预约:</strong>
+              <a
+                href="tel:050-7135-50623"
+                style="color: #d6a77a; text-decoration: none"
+                >050-7135-50623</a
+              >
+            </p>
+            <p>
+              <strong>营业时间:</strong> 上午10点至晚上7点（节假日可能调整）
+            </p>
+          </div>
         </div>
-        <div class="comment-list" id="commentList"></div>
       </div>
-
-      <!-- Map Section -->
-      <div class="card">
-        <h2 id="mapTitle"></h2>
-        <p id="mapAddress"></p>
-        <div class="map-container">
-          <iframe
-            id="mapIframe"
-            src=""
-            allowfullscreen=""
-            loading="lazy"
-          ></iframe>
-        </div>
-        <p
-          class="muted"
-          id="mapTip"
-          style="margin-top: 15px; font-size: 0.95rem; color: #666"
-        ></p>
-      </div>
-
-      <!-- Visit Info -->
-      <div class="card">
-        <h2 id="visitTitle"></h2>
-        <div class="contact-info" id="contactInfo"></div>
-        <div class="btn-group" id="ctaButtons"></div>
-      </div>
-
-      <!-- Conclusion -->
-      <section class="conclusion">
-        <h2 id="conclusionTitle"></h2>
-        <p id="conclusionText"></p>
-      </section>
     </div>
 
     <script>
-      window.va =
-        window.va ||
-        function () {
-          (window.vaq = window.vaq || []).push(arguments);
-        };
+      /**
+       * 언어 변경 함수
+       */
+      function changeLang(lang, btn) {
+        // 1. 모든 콘텐츠 섹션 숨기기
+        document.querySelectorAll(".lang-content").forEach((el) => {
+          el.classList.remove("active");
+        });
+
+        // 2. 선택한 언어 콘텐츠 보이기
+        const target = document.getElementById("content-" + lang);
+        if (target) {
+          target.classList.add("active");
+        }
+
+        // 3. 버튼 활성화 상태 업데이트
+        document.querySelectorAll(".lang-btn").forEach((b) => {
+          b.classList.remove("active");
+        });
+        btn.classList.add("active");
+
+        // 4. 문서 타이틀 업데이트
+        if (lang === "ko")
+          document.title = "제주 오브래쉬 (AUBE) | 감성 속눈썹 뷰티샵";
+        else if (lang === "en")
+          document.title = "AUBE Lash Studio | Jeju Lash & LED Extension";
+        else if (lang === "zh")
+          document.title = "AUBE 美睫沙龙 | 济州睫毛烫与LED延长";
+      }
+
+      /**
+       * 구글 맵 초기화 함수
+       */
+      function initMap() {
+        // 오브래쉬 정확한 좌표 (제주시 연북로 158)
+        const aubeLocation = { lat: 33.4815491, lng: 126.4982907 };
+
+        // 1. 지도 생성
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 17,
+          center: aubeLocation,
+        });
+
+        // 2. 마커 생성
+        const marker = new google.maps.Marker({
+          position: aubeLocation,
+          map: map,
+          title: "오브래쉬 (AUBE)",
+        });
+      }
+
+      // 전역 함수로 등록
+      window.initMap = initMap;
     </script>
-    <script>
-      let blogLang = "ko";
 
-      const blogContent = {
-        ko: {
-          metaTitle: "제주 오브래쉬 (AUBE) | 감성 속눈썹 뷰티샵",
-          backLink: "메인으로 돌아가기",
-          hero: {
-            title: "제주 감성 그대로 — 오브래쉬 (AUBE)",
-            desc: "속눈썹 펌 + LED 포인트 연장으로 완성되는, 제주 한복판 감성 뷰티샵 💫",
-          },
-          gallery: {
-            title: "오브래쉬 갤러리 📸",
-            note: "실제 시술 및 공간 사진은 Instagram @aube_lash_ 에서 확인하실 수 있어요.",
-          },
-          about: {
-            title: "오브래쉬는 어떤 곳인가요?",
-            desc: "제주 제주시 연동 연북로 158 2층에 자리한 속눈썹 & 펌 전문샵으로, 감성적인 공간에서 LED 포인트 연장과 펌 시술을 제공합니다.",
-            list: [
-              "펌 + LED 포인트 연장으로 자연스러운 볼륨감을 완성",
-              "1:1 상담으로 눈매와 라이프스타일에 맞춘 디자인 제안",
-              "케어 중심 프로세스로 속눈썹 손상 최소화",
-            ],
-          },
-          services: {
-            title: "서비스 & 매력 포인트 ✨",
-            intro:
-              "단순한 연장이 아니라, 매일 아침 새로운 눈매를 맞이하는 경험을 선사합니다.",
-            items: [
-              {
-                title: "펌 + LED 포인트 연장",
-                desc: "유지력은 높이고 무게감은 줄인 시그니처 시술",
-              },
-              {
-                title: "1:1 눈매 맞춤 디자인",
-                desc: "눈모양·골격·라이프스타일을 반영한 커스터마이징",
-              },
-              {
-                title: "제주 감성 인테리어",
-                desc: "프라이빗하고 아늑한 공간에서 편안한 시술",
-              },
-              {
-                title: "유연한 예약 시스템",
-                desc: "사전 예약제 운영 + 당일 문의 가능",
-              },
-            ],
-          },
-          reviews: {
-            title: "방문 후기 💬",
-            items: [
-              '"속눈썹이 숲처럼 살아나서 메이크업이 훨씬 쉬워졌어요." — 민지',
-              '"The whole experience felt personalized and my lashes lasted beautifully." — Emma',
-              '"服务非常细致，效果自然又持久，下次还会再来。" — 小美',
-            ],
-            placeholder: "후기를 남겨주세요...",
-            button: "등록하기",
-            confirm: "후기가 등록되었습니다! 감사합니다. ✨",
-            empty: "후기를 입력해주세요.",
-          },
-          comments: {
-            title: "커뮤니티 댓글",
-            subtitle: "누구나 짧은 소감이나 질문을 남길 수 있어요.",
-            namePlaceholder: "이름 또는 닉네임",
-            messagePlaceholder: "응원의 한마디 또는 궁금한 점을 적어주세요!",
-            button: "댓글 남기기",
-            confirm: "소중한 댓글 감사합니다! ✨",
-            empty: "이름과 내용을 모두 입력해주세요.",
-            none: "첫 번째 댓글을 남겨주세요 :)",
-          },
-          map: {
-            title: "오시는 길 🗺️",
-            address: "제주 제주시 연동 연북로 158, 2층 오브래쉬 (AUBE)",
-            tip: "💡 연동 중앙버스정류장에서 도보 3분, 건물 앞 공영주차장 1시간 무료",
-          },
-          visit: {
-            title: "방문 & 예약 안내 📍",
-            info: [
-              "<strong>주소</strong>: 제주 제주시 연북로 158, 2층",
-              '<strong>예약문의</strong>: <a href="tel:050-7135-50623" style="color:#d6a77a;text-decoration:none;">050-7135-50623</a>',
-              "<strong>운영시간</strong>: 오전 10시 ~ 저녁 7시 (공휴일 변동 가능)",
-            ],
-            buttons: [
-              {
-                text: "Instagram 방문하기",
-                href: "https://www.instagram.com/aube_lash_/",
-              },
-              {
-                text: "네이버지도 보기",
-                href: "https://map.naver.com/p/entry/place/1503575021",
-                outline: true,
-              },
-            ],
-          },
-          conclusion: {
-            title: "마무리 ✨",
-            text: "제주에서 만나는 감성 속눈썹 공간, 오브래쉬.<br>나만의 눈매와 여유를 찾는 시간을 지금 예약해 보세요.",
-          },
-        },
-        en: {
-          metaTitle: "AUBE Lash Studio | Jeju Lash & LED Extension",
-          backLink: "Back to Main",
-          hero: {
-            title: "Jeju’s Signature Lash Experience — AUBE",
-            desc: "Lash perm + LED point extensions crafted in a warm, private studio 💫",
-          },
-          gallery: {
-            title: "AUBE Gallery 📸",
-            note: "See live transformations on Instagram @aube_lash_.",
-          },
-          about: {
-            title: "What is AUBE?",
-            desc: "A boutique lash studio on the 2nd floor of 158 Yeonbuk-ro, blending Jeju aesthetics with modern techniques.",
-            list: [
-              "Lash perm + LED point extensions for airy yet defined volume",
-              "One-on-one consultations tailored to your eye shape and routine",
-              "Damage-conscious process with gentle care products",
-            ],
-          },
-          services: {
-            title: "Services & Highlights ✨",
-            intro:
-              "Wake up ready—each visit is designed to refresh your eyes and your mood.",
-            items: [
-              {
-                title: "Perm + LED Point Extension",
-                desc: "Feather-light, long-lasting definition",
-              },
-              {
-                title: "Custom Eye Design",
-                desc: "Design maps built around your eye shape and expression",
-              },
-              {
-                title: "Calm Jeju Interior",
-                desc: "Private, cozy space to unwind during service",
-              },
-              {
-                title: "Flexible Booking",
-                desc: "Advance reservations with same-day inquiries welcome",
-              },
-            ],
-          },
-          reviews: {
-            title: "Guest Voices 💬",
-            items: [
-              '"My lashes look full yet natural—exactly what I wanted." — Minji',
-              '"The service felt so personal and the results lasted for weeks." — Emma',
-              '"整个过程非常放松，成品自然又有神。" — Xiaomei',
-            ],
-            placeholder: "Leave your review...",
-            button: "Submit",
-            confirm: "Your review has been recorded. Thank you! ✨",
-            empty: "Please enter your review.",
-          },
-          comments: {
-            title: "Community Notes",
-            subtitle:
-              "Leave a quick impression or question—everyone's welcome.",
-            namePlaceholder: "Name or nickname",
-            messagePlaceholder: "Share your thoughts or ask anything!",
-            button: "Post Comment",
-            confirm: "Thanks for joining the conversation! ✨",
-            empty: "Please fill out both name and message.",
-            none: "Be the first to comment :)",
-          },
-          map: {
-            title: "How to Find Us 🗺️",
-            address: "2F, 158 Yeonbuk-ro, Yeon-dong, Jeju City (AUBE)",
-            tip: "💡 3-minute walk from Yeondong central bus stop, public parking out front (first hour free)",
-          },
-          visit: {
-            title: "Visit & Booking Info 📍",
-            info: [
-              "<strong>Address</strong>: 2F, 158 Yeonbuk-ro, Jeju City",
-              '<strong>Booking</strong>: <a href="tel:050-7135-50623" style="color:#d6a77a;text-decoration:none;">050-7135-50623</a>',
-              "<strong>Hours</strong>: 10 AM – 7 PM (hours vary on holidays)",
-            ],
-            buttons: [
-              {
-                text: "Visit Instagram",
-                href: "https://www.instagram.com/aube_lash_/",
-              },
-              {
-                text: "Open on Naver Map",
-                href: "https://map.naver.com/p/entry/place/1503575021",
-                outline: true,
-              },
-            ],
-          },
-          conclusion: {
-            title: "Takeaway ✨",
-            text: "AUBE is where Jeju calm meets modern lash artistry.<br>Book a session and greet the morning with effortless lashes.",
-          },
-        },
-        zh: {
-          metaTitle: "AUBE 美睫沙龙 | 济州睫毛烫与LED延长",
-          backLink: "返回主页",
-          hero: {
-            title: "济州感性美睫馆 — AUBE",
-            desc: "烫睫 + LED点缀延长的专属组合，让你一醒来就有迷人双眼 💫",
-          },
-          gallery: {
-            title: "AUBE 画廊 📸",
-            note: "更多作品请查看 Instagram @aube_lash_.",
-          },
-          about: {
-            title: "什么是 AUBE？",
-            desc: "位于济州市莲北路158号2楼的小型美睫工作室，以温暖空间与精细技术著称。",
-            list: [
-              "烫睫 + LED点缀延长，兼顾轻盈与存在感",
-              "一对一咨询，依据眼型与生活习惯客制设计",
-              "以修护为核心，降低睫毛损伤",
-            ],
-          },
-          services: {
-            title: "服务与亮点 ✨",
-            intro: "不仅是做睫毛，更是重新找回专属眼神的旅程。",
-            items: [
-              { title: "烫睫 + LED点缀", desc: "轻盈却持久，呈现自然层次" },
-              { title: "专属设计", desc: "根据眼型、脸型与日常需求量身打造" },
-              { title: "济州感空间", desc: "静谧包厢，享受如度假般的放松" },
-              { title: "预约制服务", desc: "全预约制，亦可当天询问空档" },
-            ],
-          },
-          reviews: {
-            title: "到访感想 💬",
-            items: [
-              '"第一次体验就爱上了，妆容也更省时。" — 民智',
-              '"Service was tailored to me and the result stayed perfect." — Emma',
-              '"效果自然、非常持久，下次还会再来。" — 小美',
-            ],
-            placeholder: "留下您的评价...",
-            button: "提交",
-            confirm: "已收到您的评价，谢谢！✨",
-            empty: "请先输入评价内容。",
-          },
-          comments: {
-            title: "留言区",
-            subtitle: "欢迎留下体验心得或任何疑问。",
-            namePlaceholder: "姓名 / 昵称",
-            messagePlaceholder: "写下想说的话或想问的问题！",
-            button: "发送留言",
-            confirm: "感谢您的留言！✨",
-            empty: "请填写姓名与留言内容。",
-            none: "抢先留下第一条留言吧 :)",
-          },
-          map: {
-            title: "如何前往 🗺️",
-            address: "济州市莲洞莲北路158号2楼 AUBE",
-            tip: "💡 距离莲洞中央站步行3分钟，楼前公共停车场首小时免费",
-          },
-          visit: {
-            title: "访问与预约 📍",
-            info: [
-              "<strong>地址</strong>: 济州市莲北路158号2楼",
-              '<strong>预约</strong>: <a href="tel:050-7135-50623" style="color:#d6a77a;text-decoration:none;">050-7135-50623</a>',
-              "<strong>营业时间</strong>: 上午10点至晚上7点（节假日可能调整）",
-            ],
-            buttons: [
-              {
-                text: "查看 Instagram",
-                href: "https://www.instagram.com/aube_lash_/",
-              },
-              {
-                text: "打开 Naver 地图",
-                href: "https://map.naver.com/p/entry/place/1503575021",
-                outline: true,
-              },
-            ],
-          },
-          conclusion: {
-            title: "结语 ✨",
-            text: "AUBE 让你在济州也能享受专属美睫时刻。<br>预约后，醒来即是理想眼神。",
-          },
-        },
-      };
-
-      function renderBlog() {
-        const content = blogContent[blogLang];
-        if (!content) return;
-
-        document.title = content.metaTitle;
-        document.documentElement.lang = blogLang;
-
-        document.getElementById("backLink").textContent = content.backLink;
-        document.getElementById("heroTitle").textContent = content.hero.title;
-        document.getElementById("heroDesc").textContent = content.hero.desc;
-
-        document.getElementById("galleryTitle").textContent =
-          content.gallery.title;
-        document.getElementById("galleryNote").textContent =
-          content.gallery.note;
-
-        document.getElementById("aboutTitle").textContent = content.about.title;
-        document.getElementById("aboutDesc").textContent = content.about.desc;
-        const aboutList = document.getElementById("aboutList");
-        aboutList.innerHTML = "";
-        content.about.list.forEach((item) => {
-          const li = document.createElement("li");
-          li.textContent = item;
-          aboutList.appendChild(li);
-        });
-
-        document.getElementById("serviceTitle").textContent =
-          content.services.title;
-        document.getElementById("serviceIntro").textContent =
-          content.services.intro;
-        const serviceGrid = document.getElementById("serviceGrid");
-        serviceGrid.innerHTML = "";
-        content.services.items.forEach((item) => {
-          const div = document.createElement("div");
-          div.className = "service-item";
-          const h3 = document.createElement("h3");
-          h3.textContent = item.title;
-          const p = document.createElement("p");
-          p.textContent = item.desc;
-          div.appendChild(h3);
-          div.appendChild(p);
-          serviceGrid.appendChild(div);
-        });
-
-        document.getElementById("reviewTitle").textContent =
-          content.reviews.title;
-        const reviewList = document.getElementById("reviewList");
-        reviewList.innerHTML = "";
-        content.reviews.items.forEach((text) => {
-          const item = document.createElement("div");
-          item.className = "review-item";
-          const p = document.createElement("p");
-          p.textContent = text;
-          item.appendChild(p);
-          reviewList.appendChild(item);
-        });
-        const reviewInput = document.getElementById("reviewInput");
-        reviewInput.placeholder = content.reviews.placeholder;
-        document.getElementById("reviewButton").textContent =
-          content.reviews.button;
-        document.getElementById("commentTitle").textContent =
-          content.comments.title;
-        document.getElementById("commentSubtitle").textContent =
-          content.comments.subtitle;
-        document.getElementById("commentName").placeholder =
-          content.comments.namePlaceholder;
-        document.getElementById("commentMessage").placeholder =
-          content.comments.messagePlaceholder;
-        document.getElementById("commentButton").textContent =
-          content.comments.button;
-        renderComments();
-
-        document.getElementById("mapTitle").textContent = content.map.title;
-        document.getElementById("mapAddress").textContent = content.map.address;
-        document.getElementById("mapTip").textContent = content.map.tip;
-        document.getElementById("mapIframe").title = content.map.title;
-
-        document.getElementById("visitTitle").textContent = content.visit.title;
-        const contactInfo = document.getElementById("contactInfo");
-        contactInfo.innerHTML = "";
-        content.visit.info.forEach((line) => {
-          const p = document.createElement("p");
-          p.innerHTML = line;
-          contactInfo.appendChild(p);
-        });
-        const ctaButtons = document.getElementById("ctaButtons");
-        ctaButtons.innerHTML = "";
-        content.visit.buttons.forEach((btn) => {
-          const a = document.createElement("a");
-          a.href = btn.href;
-          a.target = "_blank";
-          a.rel = "noopener noreferrer";
-          a.className = btn.outline ? "btn btn-outline" : "btn";
-          a.textContent = btn.text;
-          ctaButtons.appendChild(a);
-        });
-
-        document.getElementById("conclusionTitle").textContent =
-          content.conclusion.title;
-        document.getElementById("conclusionText").innerHTML =
-          content.conclusion.text;
-      }
-
-      function setBlogLang(lang) {
-        blogLang = lang;
-        document.querySelectorAll(".lang-btn").forEach((btn) => {
-          btn.classList.toggle(
-            "active",
-            btn.getAttribute("data-lang") === lang
-          );
-        });
-        renderBlog();
-      }
-
-      function submitReview() {
-        const reviewInput = document.getElementById("reviewInput");
-        const reviewText = reviewInput.value.trim();
-        const content = blogContent[blogLang].reviews;
-
-        if (reviewText) {
-          alert(content.confirm);
-          reviewInput.value = "";
-        } else {
-          alert(content.empty);
-        }
-      }
-
-      const commentKey = "aube_blog_comments";
-
-      function getStoredComments() {
-        try {
-          return JSON.parse(localStorage.getItem(commentKey)) || [];
-        } catch {
-          return [];
-        }
-      }
-
-      function saveComments(comments) {
-        localStorage.setItem(commentKey, JSON.stringify(comments));
-      }
-
-      function renderComments() {
-        const comments = getStoredComments();
-        const list = document.getElementById("commentList");
-        list.innerHTML = "";
-        const content = blogContent[blogLang].comments;
-
-        if (!comments.length) {
-          const empty = document.createElement("p");
-          empty.className = "muted";
-          empty.textContent = content.none;
-          list.appendChild(empty);
-          return;
-        }
-
-        comments
-          .slice()
-          .reverse()
-          .forEach((comment) => {
-            const item = document.createElement("div");
-            item.className = "comment-item";
-            const strong = document.createElement("strong");
-            strong.textContent = comment.name;
-            const message = document.createElement("p");
-            message.textContent = comment.message;
-            const meta = document.createElement("small");
-            meta.style.color = "#999";
-            meta.textContent = comment.time;
-            item.appendChild(strong);
-            item.appendChild(message);
-            item.appendChild(meta);
-            list.appendChild(item);
-          });
-      }
-
-      function submitComment() {
-        const nameInput = document.getElementById("commentName");
-        const messageInput = document.getElementById("commentMessage");
-        const content = blogContent[blogLang].comments;
-        const name = nameInput.value.trim();
-        const message = messageInput.value.trim();
-
-        if (!name || !message) {
-          alert(content.empty);
-          return;
-        }
-
-        const comments = getStoredComments();
-        comments.push({
-          name,
-          message,
-          time: new Date().toLocaleString(),
-        });
-        saveComments(comments);
-
-        nameInput.value = "";
-        messageInput.value = "";
-        alert(content.confirm);
-        renderComments();
-      }
-
-      async function initMap() {
-        const mapIframe = document.getElementById("mapIframe");
-        if (!mapIframe) {
-          console.error("지도 iframe을 찾을 수 없습니다.");
-          return;
-        }
-
-        // 더 정확한 위치 표시를 위해 '연동'을 포함
-        const address = "제주특별자치도 제주시 연동 연북로 158";
-        const encodedAddress = encodeURIComponent(address);
-        const apiKey = "AIzaSyCMhWNtyjNZS071H6AXlhyPxVomyS0JR5U";
-
-        // Google Maps Embed API 사용 (API 키 필요)
-        // q 파라미터에 주소를 전달하여 정확한 위치 표시
-        const googleMapUrl = `https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=${encodedAddress}&language=ko`;
-
-        // iframe 로드 실패 감지를 위한 이벤트 리스너
-        mapIframe.addEventListener("error", function () {
-          console.warn("지도 로드 실패. 대체 방법(공유 링크) 사용");
-          loadMapFallback(mapIframe);
-        });
-
-        // iframe 로드 후 확인 (403 오류 감지)
-        mapIframe.addEventListener("load", function () {
-          setTimeout(() => {
-            // iframe 내용을 확인할 수 없으므로, 부모 컨테이너 확인
-            const mapContainer = mapIframe.closest(".map-container");
-            if (mapContainer) {
-              const rect = mapIframe.getBoundingClientRect();
-              // 높이가 0이거나 너무 작으면 로드 실패로 간주
-              if (rect.height < 100) {
-                console.warn("지도 렌더링 실패 감지. 대체 방법 사용");
-                loadMapFallback(mapIframe);
-              }
-            }
-          }, 2000);
-        });
-
-        // 지도 업데이트
-        mapIframe.src = googleMapUrl;
-
-        // 3초 후에도 지도가 제대로 로드되지 않았으면 대체 방법 사용
-        setTimeout(() => {
-          const rect = mapIframe.getBoundingClientRect();
-          if (rect.height < 100) {
-            console.warn("지도 로드 타임아웃. 대체 방법 사용");
-            loadMapFallback(mapIframe);
-          }
-        }, 3000);
-      }
-
-      // 대체 방법: API 키 없이 사용 가능한 공유 링크 방식
-      function loadMapFallback(mapIframe) {
-        const address = encodeURIComponent(
-          "제주특별자치도 제주시 연동 연북로 158"
-        );
-        // API 키 없이 사용 가능한 구글맵 공유 링크
-        mapIframe.src = `https://www.google.com/maps?q=${address}&output=embed&language=ko`;
-      }
-
-      renderBlog();
-      initMap();
-    </script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=YAIzaSyB9IKNchrH0dnyrZHNDUlXHvxVhr8XuPfg&callback=initMap"
+      async
+      defer
+    ></script>
   </body>
 </html>
